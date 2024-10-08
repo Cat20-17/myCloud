@@ -1,0 +1,19 @@
+@use '../styles/variables' as *;
+
+@mixin flex-mixin($items: center, $justify: center) {
+  display: flex;
+  align-items: $items;
+  justify-content: $justify;
+}
+@mixin full-width-mixin($max-width: null) {
+  width: 100%;
+  @if $max-width {
+    max-width: $max-width;
+  }
+}
+@mixin font-mixin($weight: 700, $size: $mid-font, $color: $primary-color, $style: normal) {
+  font-weight: $weight;
+  font-size: $size;
+  font-style: $style;
+  color: $color;
+}

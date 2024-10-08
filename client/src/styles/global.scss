@@ -1,0 +1,20 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.main-container {
+  @include full-width-mixin($main-max-width);
+  @include flex-mixin();
+  background-color: $primary-background-color;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: $primary-row-height;
+}

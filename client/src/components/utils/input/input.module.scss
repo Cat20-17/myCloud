@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.input {
+  @include font-mixin(400, $mid-font, $black);
+  width: $input-width;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: $border-bottom;
+
+  &:focus {
+   outline: none;
+  }
+
+  &::placeholder {
+    @include font-mixin(400, $small-font, $primary-color, italic);
+  }
+}

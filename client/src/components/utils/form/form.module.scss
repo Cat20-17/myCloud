@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.form {
+  @include flex-mixin();
+  background-color: $white;
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.3);
+  flex-direction: column;
+  gap: $primary-gap;
+  padding: $primary-gap;
+  border-radius: $primary-border-radius;
+  width: fit-content;
+}
+.name {
+  @include font-mixin();
+}
+button {
+  align-self: flex-end;
+}

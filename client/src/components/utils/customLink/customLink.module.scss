@@ -1,0 +1,14 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.link {
+  text-decoration: none;
+}
+.primary {
+  @include font-mixin(700, $big-font);
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: $border-bottom;
+  }
+}

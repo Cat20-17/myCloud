@@ -1,0 +1,14 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+.primary {
+  @include font-mixin(700, none, $white);
+  background-color: $primary-color;
+  padding: 4px 16px;
+  border-radius: $primary-border-radius;
+}

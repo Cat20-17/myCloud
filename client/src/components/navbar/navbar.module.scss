@@ -1,0 +1,31 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.navbar {
+  @include flex-mixin();
+  @include full-width-mixin();
+  background-color: $white;
+  height: $primary-row-height;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+  z-index: 999;
+  position: fixed;
+
+  &_inner_container {
+    @include full-width-mixin();
+    @include flex-mixin(center, space-between);
+    max-width: $main-max-width;
+    padding: 0 $primary-gap;
+  }
+}
+.brand_section {
+  @include flex-mixin(center, space-between);
+  gap: $primary-gap;
+}
+
+.brand_name {
+  @include font-mixin(700, $big-font);
+}
+.user_section {
+  @include flex-mixin(normal, space-between);
+  gap: $primary-gap;
+}

@@ -27,7 +27,7 @@ exports.register = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
 
 exports.login = async (req, res, next) => {
   try {
@@ -53,7 +53,10 @@ exports.login = async (req, res, next) => {
 
     const jwtPayload = {userId: user.id};
     const token = createJWT(jwtPayload);
-    const responseData = createResponseData(res, 200, 'User logged in', {'Authorization': `Bearer ${token}`});
+    const { password: userPassword, ...userWithoutPassword } = user.toObject();
+    const responseData = createResponseData(res, 200, 'User logged in',
+      {'Authorization': `Bearer ${token}`},
+      userWithoutPassword);
     return ResponseBuilder.success(responseData);
   }
   catch (error) {
