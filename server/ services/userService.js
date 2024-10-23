@@ -1,8 +1,18 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-async function findUser(email) {
-  return User.findOne({email});
+async function findUser(criteria) {
+  try {
+    if (criteria.email) {
+      return await User.findOne({ email: criteria.email });
+    }
+    else if (criteria.userId) {
+      return await User.findOne({ _id: criteria.userId });
+    }
+  } catch (error) {
+    console.error('Ошибка при поиске пользователя:', error);
+    throw error;
+  }
 }
 
 async function hashPassword(password) {

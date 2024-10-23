@@ -1,7 +1,7 @@
 const authRouter = require('express').Router();
 const { passwordValidation, emailValidation, userNameValidation } = require('../middlewares/validators');
 const authController = require('../controllers/authController');
-
+const CheckJWT = require('../middlewares/checkJWT');
 authRouter.post('/register', [
   ...userNameValidation,
   ...emailValidation,
@@ -13,6 +13,11 @@ authRouter.post('/login', [
   ...emailValidation,
   ...passwordValidation,
 ],
-authController.login);
+authController.login
+);
+authRouter.post('/refresh',
+  CheckJWT.checkRefreshToken,
+  authController.refreshAuthToken
+);
 
-module.exports = {authRouter};
+module.exports = { authRouter };

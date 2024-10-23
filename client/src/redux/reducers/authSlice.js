@@ -1,6 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setUser, clearUser } from './userSlice';
-import {login} from '../../services/authService';
+import { login, register } from '../../services/authService';
+
+export const registerUser = createAsyncThunk(
+  'auth/registerUser',
+  async (credentials, {rejectWithValue}) => {
+    try {
+      await register(credentials);
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  }
+);
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
@@ -21,25 +32,26 @@ export const loginUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk('auth/logoutUser',
   async (_, { dispatch }) => {
-  try {
-    dispatch(logout());
-    localStorage.removeItem('token');
-    dispatch(clearUser());
-  } catch (error) {
-    console.error('Logout error:', error);
-   }
+    try {
+      dispatch(logout());
+      dispatch(clearUser());
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 );
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem('isAuthenticated') || false,
     error: null,
   },
   reducers: {
     logout(state) {
-      state.isAuthenticated = false
+      state.isAuthenticated = false;
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('token');
     },
   },
   extraReducers: (builder) => {
@@ -50,6 +62,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
+        localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('token', action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {

@@ -4,6 +4,7 @@ const config = require('config');
 const cors = require('cors');
 const corsOptions = require('./middlewares/corsConfig');
 const router = require('./routes');
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -11,6 +12,7 @@ const PORT = config.get('serverPort');
 const dbUrl = config.get('dbUrl');
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(router);
 app.use(errorHandler);

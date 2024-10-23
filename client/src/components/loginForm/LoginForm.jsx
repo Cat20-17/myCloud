@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Input from '../utils/input/Input';
 import Button from '../utils/button/Button';
 import Form from '../utils/form/Form';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/reducers/authSlice';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = React.useState('');
@@ -13,16 +13,16 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = async (e) => {
+  const onSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     const result = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(result)) {
-      const userId = result.payload.user._id;
-      navigate(`/users/${userId}`);
+      navigate(`/user/files`);
     }
-  };
+  }, [email, password, dispatch, navigate]
+  );
 
   return (
     <Form onSubmit={onSubmit} name={'Log In'}>

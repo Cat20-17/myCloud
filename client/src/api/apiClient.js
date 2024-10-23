@@ -21,7 +21,7 @@ class ApiClient {
     return this.request('get', url, null, config);
   }
 
-  static async post(url, data, config = {}) {
+  static async post(url, data = {}, config = {}) {
     return this.request('post', url, data, config);
   }
 

@@ -1,17 +1,17 @@
 import ProtectedRoutes from '../components/protectedRotes/ProtectedRoutes';
-import UserPage from '../pages/userPage/UserPage';
+import FilesPage from '../pages/filesPage/FilesPage';
 
-const usersRoutes = [
+const userRoutes = [
   {
-    path: 'users/:id',
+    path: 'user/files',
     element: <ProtectedRoutes />,
     children: [
       {
         path: '',
-        element: <UserPage />,
+        element: <FilesPage />,
       }
     ]
   }
 ];
 
-export default usersRoutes;
+export default userRoutes;
