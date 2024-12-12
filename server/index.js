@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('config');
+require('dotenv').config();
 const cors = require('cors');
 const corsOptions = require('./middlewares/corsConfig');
 const router = require('./routes');
@@ -8,8 +8,8 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
-const PORT = config.get('serverPort');
-const dbUrl = config.get('dbUrl');
+const PORT = process.env.SERVER_PORT || 5000;
+const dbUrl = process.env.DB_URL;
 
 app.use(express.json());
 app.use(cookieParser());

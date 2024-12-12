@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const createResponseData = require('../utilities/createResponseData');
 const ResponseBuilder = require('../utilities/responseBuilder');
-const config = require('config');
 
 class CheckJWT {
   static checkAuthToken(req, res, next) {
@@ -13,7 +12,7 @@ class CheckJWT {
       return ResponseBuilder.error(responseData);
     }
 
-    const SECRET_KEY = config.get('accessSecretKey');
+    const SECRET_KEY = process.env.ACCESS_SECRET_KEY;
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
       if (err) {
@@ -32,7 +31,7 @@ class CheckJWT {
       return ResponseBuilder.error(responseData);
     }
 
-    const SECRET_KEY = config.get('refreshSecretKey');
+    const SECRET_KEY = process.env.REFRESH_SECRET_KEY;
 
     jwt.verify(refreshToken, SECRET_KEY, (err, decoded) => {
       if (err) {

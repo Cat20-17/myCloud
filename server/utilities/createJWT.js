@@ -1,9 +1,8 @@
-const config = require("config");
 const jwt = require("jsonwebtoken");
 
 class CreateJWT {
-  static #accessSecretKey = config.get('accessSecretKey');
-  static #refreshSecretKey = config.get('refreshSecretKey');
+  static #accessSecretKey = process.env.ACCESS_SECRET_KEY;
+  static #refreshSecretKey = process.env.REFRESH_SECRET_KEY;
 
   static access(payload) {
     return jwt.sign(
